@@ -15,6 +15,9 @@ const APEX_API_HOST = 'https://api.mozambiquehe.re';
 const APEX_API_PATH = '/maprotation?version=2'
 const GIBBY_IMG = 'https://images.gnwcdn.com/2020/usgamer/apex-legends-gibby-bug.jpg';
 
+// Regex
+const pattern = /sad/i;
+
 var app = express();
 
 app.use(express.static(__dirname + '/public'))
@@ -228,6 +231,15 @@ client.on("messageCreate", async (message) => {
             }
         });
 
+    }
+
+    // Using regex, check all cases for text "sad" 
+    //if (pattern.test(message.content)) 
+    if (message.content == "!sad") {
+        var gibbyJSON = require("./gibby_quotes.json");
+        var RNG = (Math.floor(Math.random() * 10)).toString();
+        var wholesomeMessage = gibbyJSON.quotes[RNG].quote;
+        message.channel.send(wholesomeMessage);
     }
 });
 
