@@ -111,7 +111,10 @@ function getCurrentMap() {
     });
 }
 
-// getCurrentMap();
+app.get('', async (req, res) => {
+    res.send("I'm up!");
+})
+
 app.get('/apex', async (_, res) => {
     getCurrentMap();
     res.send(mapData);
