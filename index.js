@@ -198,7 +198,7 @@ client.on("messageCreate", async (message) => {
                 }
 
                 var embedArenasMessage = {
-                    color: 0x0099ff,
+                    color: 0xC86A6F,
                     title: 'Arenas',
                     fields: [
                         {
