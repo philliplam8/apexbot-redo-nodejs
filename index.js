@@ -184,7 +184,7 @@ client.on("messageCreate", async (message) => {
                             inline: true,
                         },
                         {
-                            name: 'Remaining time',
+                            name: 'Remaining Time',
                             value: brCurrentMapRemainingTimer,
                             inline: true,
                         },
@@ -207,7 +207,7 @@ client.on("messageCreate", async (message) => {
                             inline: true,
                         },
                         {
-                            name: 'Remaining time',
+                            name: 'Remaining Time',
                             value: arenasCurrentMapRemainingTimer,
                             inline: true,
                         },
