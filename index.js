@@ -148,7 +148,7 @@ client.on("messageCreate", async (message) => {
         })
     }
 
-    if (message.content == "!d") {
+    if (message.content == "!map") {
         request.get(url, function (error, response, body) {
             if (!error && response.statusCode === 200) {
                 mapData = JSON.parse(body);
