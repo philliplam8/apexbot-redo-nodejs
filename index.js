@@ -122,9 +122,12 @@ app.get('/apex', async (_, res) => {
 });
 
 
-// // Discord Client -------------------------------------------------------------
+// Discord Client -------------------------------------------------------------
+
+// Create a new client instance
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
+// Login to Discord with your client's token
 client.login(DISCORD_TOKEN);
 
 // client is an instance of Discord.Client
@@ -232,7 +235,7 @@ client.on('messageCreate', async (message) => {
 
 	// Using regex, check all cases for text "sad"
 	if (pattern.test(message.content)) {
-		const gibbyJSON = require('./gibby_quotes.json');
+		const gibbyJSON = require('./assets/gibby_quotes.json');
 		const RNG = (Math.floor(Math.random() * 10)).toString();
 		const wholesomeMessage = blockQuote(gibbyJSON.quotes[RNG].quote);
 		message.reply(wholesomeMessage);
