@@ -234,8 +234,7 @@ client.on("messageCreate", async (message) => {
     }
 
     // Using regex, check all cases for text "sad" 
-    //if (pattern.test(message.content)) 
-    if (message.content == "!sad") {
+    if (pattern.test(message.content)) {
         var gibbyJSON = require("./gibby_quotes.json");
         var RNG = (Math.floor(Math.random() * 10)).toString();
         var wholesomeMessage = gibbyJSON.quotes[RNG].quote;
