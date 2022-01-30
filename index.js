@@ -4,6 +4,7 @@ var cookieParser = require('cookie-parser');
 var request = require('request'); // "Request" library
 require('dotenv').config();
 const { Client, Intents, MessageEmbed, MessageFlags } = require('discord.js');
+const { bold, italic, strikethrough, underscore, spoiler, quote, blockQuote } = require('@discordjs/builders');
 
 // Environment Variables
 const PORT = process.env.PORT || 5000;
@@ -237,8 +238,8 @@ client.on("messageCreate", async (message) => {
     if (pattern.test(message.content)) {
         var gibbyJSON = require("./gibby_quotes.json");
         var RNG = (Math.floor(Math.random() * 10)).toString();
-        var wholesomeMessage = gibbyJSON.quotes[RNG].quote;
-        message.channel.send(wholesomeMessage);
+        var wholesomeMessage = blockQuote(gibbyJSON.quotes[RNG].quote);
+        message.reply(wholesomeMessage);
     }
 });
 
