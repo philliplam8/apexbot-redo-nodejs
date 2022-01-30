@@ -12,11 +12,6 @@ const PORT = process.env.PORT || 5000;
 const APEX_API_TOKEN = process.env.APEX_LEGENDS_API_TOKEN;
 const DISCORD_TOKEN = process.env.DISCORD_TOKEN;
 
-// APEX API URL
-const APEX_API_HOST = 'https://api.mozambiquehe.re';
-const APEX_API_PATH = '/maprotation?version=2';
-const GIBBY_IMG = 'https://images.gnwcdn.com/2020/usgamer/apex-legends-gibby-bug.jpg';
-
 // Regex
 const pattern = /sad/i;
 
@@ -136,9 +131,10 @@ client.login(DISCORD_TOKEN);
 client.on('messageCreate', async (message) => {
 
 	getCurrentMap();
-
-	if (message.content == '!ping') { // Check if content of message is "!ping"
-		message.channel.send('pong!'); // Call .send() on the channel object the message was sent in
+	// Check if content of message is "!ping"
+	if (message.content == '!ping') {
+		// Call .send() on the channel object the message was sent in
+		message.channel.send('pong!');
 	}
 
 	if (message.content == '!test') {
