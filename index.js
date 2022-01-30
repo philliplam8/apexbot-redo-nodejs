@@ -10,7 +10,7 @@ const GIBBY_LAUGH = 'https://lh3.googleusercontent.com/pw/AM-JKLVGx1ZWfcDVTgCVCE
 // Environment Variables
 const PORT = process.env.PORT || 5000;
 const APEX_API_TOKEN = process.env.APEX_LEGENDS_API_TOKEN;
-const DISCORD_TOKEN = process.env.DISCORD_TOKEN_DEV;
+const DISCORD_TOKEN = process.env.DISCORD_TOKEN;
 
 // Regex
 const pattern = /sad/i;
@@ -22,23 +22,21 @@ app.use(express.static(__dirname + '/public'))
 	.use(cookieParser());
 
 // Apex API GET Requests ------------------------------------------------------
-let mapData = '';
-let mapMessage = 'not started';
-
+let mapData;
 
 // Setting the configuration for the request
 const url = 'https://api.mozambiquehe.re/maprotation?version=2&auth=' + APEX_API_TOKEN;
 
 function getCurrentMap() {
 
-	request.get(url, function (error, response, body) {
+	request.get(url, function(error, response, body) {
 		if (!error && response.statusCode === 200) {
 			mapData = JSON.parse(body);
 
 			// Battle Royale Data
 			const brData = mapData.battle_royale;
 			const brCurrentMap = brData.current.map;
-			const brCurrentMapRemainingMinutes = brData.current.remainingMins;
+			// const brCurrentMapRemainingMinutes = brData.current.remainingMins;
 			const brCurrentMapRemainingTimer = brData.current.remainingTimer;
 			const brCurrentMapImage = brData.current.asset;
 			const brNextMap = brData.next.map;
@@ -46,16 +44,12 @@ function getCurrentMap() {
 			// Arenas Data
 			const arenaData = mapData.arenas;
 			const arenasCurrentMap = arenaData.current.map;
-			const arenasCurrentMapRemainingMinutes = arenaData.current.remainingMins;
+			// const arenasCurrentMapRemainingMinutes = arenaData.current.remainingMins;
 			const arenasCurrentMapRemainingTimer = arenaData.current.remainingTimer;
 			const areansCurrentMapImage = arenaData.current.asset;
 			const arenasNextMap = arenaData.next.map;
 
 			// Construct Message
-			const battleRoyaleMessage = '**Battle Royale:**\nThe current map is **' + brCurrentMap + '** for the next **' + brCurrentMapRemainingMinutes + '** minutes.\nThe next map is **' + brNextMap + '** bruddas.';
-			const arenasMessage = '\n\n**Arenas:**\nThe current map is **' + arenasCurrentMap + '** for the next **' + arenasCurrentMapRemainingMinutes + '** minutes.\nThe next map is **' + arenasNextMap + '**.';
-			mapMessage = battleRoyaleMessage + arenasMessage;
-
 			const embedBattleRoyaleMessage = {
 				color: 0x0099ff,
 				title: 'Battle Royale',
@@ -102,11 +96,7 @@ function getCurrentMap() {
 				},
 			};
 
-			embedDemo = new MessageEmbed()
-				.setColor('0x0099ff')
-				.setTitle('Battle Royale');
-
-			return;
+			return { embedBattleRoyaleMessage, embedArenasMessage };
 		}
 	});
 }
@@ -133,27 +123,14 @@ client.login(DISCORD_TOKEN);
 // client is an instance of Discord.Client
 client.on('messageCreate', async (message) => {
 
-	getCurrentMap();
 	// Check if content of message is "!ping"
 	if (message.content == '!ping') {
 		// Call .send() on the channel object the message was sent in
 		message.channel.send('pong!');
 	}
 
-	if (message.content == '!test') {
-		request.get(url, function (error, response) {
-			if (!error && response.statusCode === 200) {
-
-				getCurrentMap();
-
-				// TODO: add a promise here to wait until getCurrentMap is updated before message is sent
-				message.channel.send(mapMessage);
-			}
-		});
-	}
-
 	if (message.content == '!map') {
-		request.get(url, function (error, response, body) {
+		request.get(url, function(error, response, body) {
 			if (!error && response.statusCode === 200) {
 				mapData = JSON.parse(body);
 
@@ -233,11 +210,14 @@ client.on('messageCreate', async (message) => {
 
 	}
 
-	// Using regex, check all cases for text "sad"
+	// Return wholesome Gibby message (using regex, check all cases for text "sad")
 	if (pattern.test(message.content)) {
 		const gibbyJSON = require('./assets/gibby_quotes.json');
 		const RNG = (Math.floor(Math.random() * 10)).toString();
-		const wholesomeMessage = blockQuote(gibbyJSON.quotes[RNG].quote);
+		const wholesomeMessage = {
+			'tts': true,
+			'content': blockQuote(gibbyJSON.quotes[RNG].quote),
+		};
 		message.reply(wholesomeMessage);
 	}
 });
@@ -261,14 +241,13 @@ client.on('interactionCreate', async interaction => {
 		let embedBattleRoyaleMessage;
 		let embedArenasMessage;
 
-		request.get(url, function (error, response, body) {
+		request.get(url, function(error, response, body) {
 			if (!error && response.statusCode === 200) {
 				mapData = JSON.parse(body);
 
 				// Battle Royale Data
 				const brData = mapData.battle_royale;
 				const brCurrentMap = brData.current.map;
-				const brCurrentMapRemainingMinutes = brData.current.remainingMins;
 				const brCurrentMapRemainingTimer = brData.current.remainingTimer;
 				const brCurrentMapImage = brData.current.asset;
 				const brNextMap = brData.next.map;
@@ -276,7 +255,6 @@ client.on('interactionCreate', async interaction => {
 				// Arenas Data
 				const arenaData = mapData.arenas;
 				const arenasCurrentMap = arenaData.current.map;
-				const arenasCurrentMapRemainingMinutes = arenaData.current.remainingMins;
 				const arenasCurrentMapRemainingTimer = arenaData.current.remainingTimer;
 				const areansCurrentMapImage = arenaData.current.asset;
 				const arenasNextMap = arenaData.next.map;
@@ -334,8 +312,6 @@ client.on('interactionCreate', async interaction => {
 				interaction.reply({ embeds: [embedBattleRoyaleMessage, embedArenasMessage] });
 			}
 		});
-
-
 	}
 });
 

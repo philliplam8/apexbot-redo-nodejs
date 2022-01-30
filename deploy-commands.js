@@ -4,9 +4,9 @@ const { Routes } = require('discord-api-types/v9');
 require('dotenv').config();
 
 // Environment Variables
-const DISCORD_TOKEN = process.env.DISCORD_TOKEN_DEV;
-const CLIENT_ID = process.env.CLIENT_ID_DEV;
-const GUILD_ID = process.env.GUILD_ID_DEV;
+const DISCORD_TOKEN = process.env.DISCORD_TOKEN;
+const CLIENT_ID = process.env.CLIENT_ID;
+const GUILD_ID = process.env.GUILD_ID;
 
 const commands = [
 	new SlashCommandBuilder().setName('ping').setDescription('Replies with pong!'),
