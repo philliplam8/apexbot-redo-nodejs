@@ -3,8 +3,8 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const request = require('request');
 require('dotenv').config();
-const { Client, Intents, MessageEmbed, MessageFlags } = require('discord.js');
-const { bold, italic, strikethrough, underscore, spoiler, quote, blockQuote } = require('@discordjs/builders');
+const { Client, Intents, MessageEmbed } = require('discord.js');
+const { blockQuote } = require('@discordjs/builders');
 const GIBBY_LAUGH = 'https://lh3.googleusercontent.com/pw/AM-JKLVGx1ZWfcDVTgCVCEAZ2ks1e-grT6oO2rEZ4LWWK5B6ZTLwV0wl3iCg9Nx068KfLrncH3aL2q5rxkshX913QMc0zeRd16g-VJpljzI8amJbpPwnICrSCSchC9QKMQott6UaHXJGVnaUbttOWC6pRMnq2Q=w1022-h466-no?authuser=0';
 
 // Environment Variables
@@ -141,7 +141,7 @@ client.on('messageCreate', async (message) => {
 	}
 
 	if (message.content == '!test') {
-		request.get(url, function(error, response, body) {
+		request.get(url, function(error, response) {
 			if (!error && response.statusCode === 200) {
 
 				getCurrentMap();
