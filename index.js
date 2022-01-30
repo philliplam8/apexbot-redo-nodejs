@@ -3,8 +3,8 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const request = require('request');
 require('dotenv').config();
-const { Client, Intents, MessageEmbed } = require('discord.js');
-const { blockQuote } = require('@discordjs/builders');
+const { Client, Intents } = require('discord.js');
+const { italic } = require('@discordjs/builders');
 const GIBBY_LAUGH = 'https://lh3.googleusercontent.com/pw/AM-JKLVGx1ZWfcDVTgCVCEAZ2ks1e-grT6oO2rEZ4LWWK5B6ZTLwV0wl3iCg9Nx068KfLrncH3aL2q5rxkshX913QMc0zeRd16g-VJpljzI8amJbpPwnICrSCSchC9QKMQott6UaHXJGVnaUbttOWC6pRMnq2Q=w1022-h466-no?authuser=0';
 
 // Environment Variables
@@ -137,7 +137,7 @@ client.on('messageCreate', async (message) => {
 				// Battle Royale Data
 				const brData = mapData.battle_royale;
 				const brCurrentMap = brData.current.map;
-				const brCurrentMapRemainingMinutes = brData.current.remainingMins;
+				// const brCurrentMapRemainingMinutes = brData.current.remainingMins;
 				const brCurrentMapRemainingTimer = brData.current.remainingTimer;
 				const brCurrentMapImage = brData.current.asset;
 				const brNextMap = brData.next.map;
@@ -145,16 +145,12 @@ client.on('messageCreate', async (message) => {
 				// Arenas Data
 				const arenaData = mapData.arenas;
 				const arenasCurrentMap = arenaData.current.map;
-				const arenasCurrentMapRemainingMinutes = arenaData.current.remainingMins;
+				// const arenasCurrentMapRemainingMinutes = arenaData.current.remainingMins;
 				const arenasCurrentMapRemainingTimer = arenaData.current.remainingTimer;
 				const areansCurrentMapImage = arenaData.current.asset;
 				const arenasNextMap = arenaData.next.map;
 
 				// Construct Message
-				const battleRoyaleMessage = '**Battle Royale:**\nThe current map is **' + brCurrentMap + '** for the next **' + brCurrentMapRemainingMinutes + '** minutes.\nThe next map is **' + brNextMap + '** bruddas.';
-				const arenasMessage = '\n\n**Arenas:**\nThe current map is **' + arenasCurrentMap + '** for the next **' + arenasCurrentMapRemainingMinutes + '** minutes.\nThe next map is **' + arenasNextMap + '**.';
-				mapMessage = battleRoyaleMessage + arenasMessage;
-
 				const embedBattleRoyaleMessage = {
 					color: 0x0099ff,
 					title: 'Battle Royale',
@@ -214,11 +210,12 @@ client.on('messageCreate', async (message) => {
 	if (pattern.test(message.content)) {
 		const gibbyJSON = require('./assets/gibby_quotes.json');
 		const RNG = (Math.floor(Math.random() * 10)).toString();
-		const wholesomeMessage = {
+		const wholesomeMessage = italic('"' + gibbyJSON.quotes[RNG].quote + '" - Makoa Gibraltar, 2733');
+		const messageTTS = {
 			'tts': true,
-			'content': blockQuote(gibbyJSON.quotes[RNG].quote),
+			'content': wholesomeMessage,
 		};
-		message.reply(wholesomeMessage);
+		message.reply(messageTTS);
 	}
 });
 
@@ -241,7 +238,7 @@ client.on('interactionCreate', async interaction => {
 		let embedBattleRoyaleMessage;
 		let embedArenasMessage;
 
-		request.get(url, function(error, response, body) {
+		request.get(url, function (error, response, body) {
 			if (!error && response.statusCode === 200) {
 				mapData = JSON.parse(body);
 
