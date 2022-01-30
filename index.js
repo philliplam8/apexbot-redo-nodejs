@@ -10,7 +10,7 @@ const GIBBY_LAUGH = 'https://lh3.googleusercontent.com/pw/AM-JKLVGx1ZWfcDVTgCVCE
 // Environment Variables
 const PORT = process.env.PORT || 5000;
 const APEX_API_TOKEN = process.env.APEX_LEGENDS_API_TOKEN;
-const DISCORD_TOKEN = process.env.DISCORD_TOKEN;
+const DISCORD_TOKEN = process.env.DISCORD_TOKEN_DEV;
 
 // Regex
 const pattern = /sad/i;
@@ -31,7 +31,7 @@ const url = 'https://api.mozambiquehe.re/maprotation?version=2&auth=' + APEX_API
 
 function getCurrentMap() {
 
-	request.get(url, function(error, response, body) {
+	request.get(url, function (error, response, body) {
 		if (!error && response.statusCode === 200) {
 			mapData = JSON.parse(body);
 
@@ -141,7 +141,7 @@ client.on('messageCreate', async (message) => {
 	}
 
 	if (message.content == '!test') {
-		request.get(url, function(error, response) {
+		request.get(url, function (error, response) {
 			if (!error && response.statusCode === 200) {
 
 				getCurrentMap();
@@ -153,7 +153,7 @@ client.on('messageCreate', async (message) => {
 	}
 
 	if (message.content == '!map') {
-		request.get(url, function(error, response, body) {
+		request.get(url, function (error, response, body) {
 			if (!error && response.statusCode === 200) {
 				mapData = JSON.parse(body);
 
@@ -239,6 +239,103 @@ client.on('messageCreate', async (message) => {
 		const RNG = (Math.floor(Math.random() * 10)).toString();
 		const wholesomeMessage = blockQuote(gibbyJSON.quotes[RNG].quote);
 		message.reply(wholesomeMessage);
+	}
+});
+
+// Replying to slash commands
+client.on('interactionCreate', async interaction => {
+	if (!interaction.isCommand()) return;
+
+	const { commandName } = interaction;
+
+	if (commandName === 'ping') {
+		await interaction.reply('Pong!');
+	}
+	else if (commandName === 'server') {
+		await interaction.reply(`Server name: ${interaction.guild.name}\nTotal members: ${interaction.guild.memberCount}`);
+	}
+	else if (commandName === 'user') {
+		await interaction.reply(`Your tag: ${interaction.user.tag}\nYour id: ${interaction.user.id}`);
+	}
+	else if (commandName === 'map') {
+		let embedBattleRoyaleMessage;
+		let embedArenasMessage;
+
+		request.get(url, function (error, response, body) {
+			if (!error && response.statusCode === 200) {
+				mapData = JSON.parse(body);
+
+				// Battle Royale Data
+				const brData = mapData.battle_royale;
+				const brCurrentMap = brData.current.map;
+				const brCurrentMapRemainingMinutes = brData.current.remainingMins;
+				const brCurrentMapRemainingTimer = brData.current.remainingTimer;
+				const brCurrentMapImage = brData.current.asset;
+				const brNextMap = brData.next.map;
+
+				// Arenas Data
+				const arenaData = mapData.arenas;
+				const arenasCurrentMap = arenaData.current.map;
+				const arenasCurrentMapRemainingMinutes = arenaData.current.remainingMins;
+				const arenasCurrentMapRemainingTimer = arenaData.current.remainingTimer;
+				const areansCurrentMapImage = arenaData.current.asset;
+				const arenasNextMap = arenaData.next.map;
+
+				// Construct Message
+				embedBattleRoyaleMessage = {
+					color: 0x0099ff,
+					title: 'Battle Royale',
+					thumbnail: {
+						url: GIBBY_LAUGH,
+					},
+					fields: [
+						{
+							name: 'Current Map',
+							value: brCurrentMap,
+							inline: true,
+						},
+						{
+							name: 'Remaining Time',
+							value: brCurrentMapRemainingTimer,
+							inline: true,
+						},
+					],
+					image: {
+						url: brCurrentMapImage,
+					},
+					footer: {
+						text: 'Next map: ' + brNextMap,
+					},
+				};
+
+				embedArenasMessage = {
+					color: 0xC86A6F,
+					title: 'Arenas',
+					fields: [
+						{
+							name: 'Current Map',
+							value: arenasCurrentMap,
+							inline: true,
+						},
+						{
+							name: 'Remaining Time',
+							value: arenasCurrentMapRemainingTimer,
+							inline: true,
+						},
+					],
+					image: {
+						url: areansCurrentMapImage,
+					},
+					footer: {
+						text: 'Next map: ' + arenasNextMap,
+					},
+				};
+
+				interaction.reply({ embeds: [embedBattleRoyaleMessage, embedArenasMessage] });
+			}
+		});
+
+
 	}
 });
 
