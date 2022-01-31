@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 5000;
 const APEX_API_TOKEN = process.env.APEX_LEGENDS_API_TOKEN;
 const DISCORD_TOKEN = process.env.DISCORD_TOKEN;
 
-// Regex
+// Regex for triggering wholesome Gibby message reply
 const pattern = /sad/i;
 
 const app = express();
