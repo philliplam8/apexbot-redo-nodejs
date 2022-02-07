@@ -17,9 +17,11 @@
     "request": "^2.88.2"
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "jest"
   },
   "devDependencies": {
-    "eslint": "^8.8.0"
+    "eslint": "^8.8.0",
+    "jest": "^27.4.7"
   }
 }
