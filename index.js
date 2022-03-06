@@ -207,13 +207,11 @@ client.on('messageCreate', async (message) => {
 				message.channel.send({ embeds: [embedBattleRoyaleMessage, embedArenasMessage] });
 			}
 		});
-
 	}
 
-
-	// Return wholesome Gibby message (using regex, check all cases for text "sad")
-
 	if (parseInt(CURRENT_GUILD_ID) == parseInt(GUILD_ID) || parseInt(CURRENT_GUILD_ID) == parseInt(GUILD_ID_PL)) {
+
+		// Return wholesome Gibby message (using regex, check all cases for text "sad")
 		if (pattern.test(message.content)) {
 
 			const gibbyJSON = require('./assets/gibby_quotes.json');
