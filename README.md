@@ -1,7 +1,8 @@
-# ApexBot
-
+# Apex Legends Map Rotation Bot
+This is a Discord Bot that provides information on the current Apex Legends Map Rotation
 
 ## Screenshot
+<img src='./assets/DemoImage.png' alt='demo screenshot desktop view'>
 
 ## Getting Started
 
