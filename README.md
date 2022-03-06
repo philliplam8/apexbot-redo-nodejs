@@ -1,8 +1,17 @@
 # Apex Legends Map Rotation Bot
-This is a Discord Bot that provides information on the current Apex Legends Map Rotation
+This is a Discord Bot that provides information on the current Apex Legends Map Rotation updates and Gibby cheers you up when you're sad.
+
+### Usage
+- Use slash command `/map` or type `!map` into any channel in the server.  
+   - This will return the current public and arenas map, their remaining minutes, and their next map.
+- Any text message with the key phrase _"sad"_ (case not sensitive) will trigger a whole TTS (text to speech) message from Gibby.
 
 ## Screenshot
+Slash command `/map`
 <img src='./assets/DemoImage.png' alt='demo screenshot desktop view'>
+
+Gibby TTS
+[Gibby TTS Demo]('./assets/DemoGibbyTTS.mp4')
 
 ## Getting Started
 
@@ -10,6 +19,12 @@ This is a Discord Bot that provides information on the current Apex Legends Map 
 - [x] Discord Account 
 
 ### Installation
+This project will use the following APIs and free services to run and host the applicationgit
+- [Heroku](https://www.heroku.com/)
+- [Unofficial Apex Legends API](https://apexlegendsapi.com/index.php)
+- [FreshPing](https://app.freshping.io/)
+
+#### 1. Clone and install dependencies
 1. Clone this project
     ```console
     git clone 
@@ -18,15 +33,8 @@ This is a Discord Bot that provides information on the current Apex Legends Map 
     ```console
     npm install 
     ```
-3. Follow steps in the [Usage](#Usage) section
 
-### Usage
-This project will use the following APIs and free services to run and host the applicationgit
-- [Heroku](https://www.heroku.com/)
-- [Unofficial Apex Legends API](https://apexlegendsapi.com/index.php)
-- [FreshPing](https://app.freshping.io/)
-
-#### 1. Environment Variables File
+#### 2. Environment Variables File
 > ***IMPORTANT:*** *Ensure the .env file is not made available to the public i.e. not uploaded to a public repository (to workaround this, use a .gitignore file). Your tokens and secrets should be kept hidden and treated like a password as they can be misused. If they are compromised, re-issue a new token/secret from the application accordingly.*
 1. Create an environments variable file called `.env` in the root directory of the project
 2. Copy and paste the following into the `.env` file
@@ -50,13 +58,13 @@ This project will use the following APIs and free services to run and host the a
     ```
 3. In the following next steps, we will be adding several environment variables into this file
 
-#### 2. APEX API
+#### 3. APEX API
 1. Visit [third party Apex Legends API](https://apexlegendsapi.com/index.php)
 2. Follow the instructions on the site and generate an API key
 3. Copy the API key generated 
 4. Paste the API key into the `.env` file `APEX_LEGENDS_API_TOKEN` variable
 
-#### 3. Create and Add Discord Bot to Server
+#### 4. Create and Add Discord Bot to Server
 1. Visit [Discord Developer Portal](https://discord.com/developers/applications)
 2. Sign into Discord
 3. Click _New Application_ 
@@ -76,7 +84,7 @@ This project will use the following APIs and free services to run and host the a
 17. Right click on your desired server and click _Copy ID_
 18. Paste the value into the `.env` file `GUILD_ID` variable
 
-#### 4. Create a new Heroku app and deploy app
+#### 5. Create a new Heroku app and deploy app
 > _Heroku is used here, but feel free to use any hosting method (local, AWS, etc.)_
 1. Visit [Heroku](https://id.heroku.com/login) and create a new account (or sign in with an existing account)
 2. Click *New > Create new app*
@@ -86,7 +94,7 @@ This project will use the following APIs and free services to run and host the a
 6. Copy and paste all key/values from the `.env` file into the Heroku Config Vars section
 7. Click on *More > View Logs* and ensure the app has been deployed successfully
 
-#### 5. Setup FreshPing to periodically ping Heroku app
+#### 6. Setup FreshPing to periodically ping Heroku app
 1. Visit [Freshping](https://app.freshping.io/) and create a new account (or sign in with an existing account)
 2. Click *+ Add Check*
 3. Enter the Heroku app URL into the *Check URL* field
