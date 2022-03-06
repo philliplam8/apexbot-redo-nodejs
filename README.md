@@ -1,10 +1,11 @@
 # Apex Legends Map Rotation Bot
-This is a Discord Bot that provides information on the current Apex Legends Map Rotation updates and Gibby cheers you up when you're sad.
+This is a Discord Bot that provides information on the current Apex Legends Map Rotation updates and will send wholesome Gibby TTS messages when you are sad in the chat.
 
 ### Usage
-- Use slash command `/map` or type `!map` into any channel in the server.  
-   - This will return the current public and arenas map, their remaining minutes, and their next map.
-- Any text message with the key phrase _"sad"_ (case not sensitive) will trigger a whole TTS (text to speech) message from Gibby.
+- Use slash command `/map` or type `!map` into any channel in the server.   
+  > This will return the current public and arenas map, their remaining minutes, and their next map.
+- Type any text message with the key phrase _"sad"_ (case not sensitive)  
+  > This will trigger a randomized wholesome TTS (text to speech) message from 	Makoa Gibraltar.
 
 ### Screenshot
 Slash command `/map`  
