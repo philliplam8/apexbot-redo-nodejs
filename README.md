@@ -6,12 +6,12 @@ This is a Discord Bot that provides information on the current Apex Legends Map 
    - This will return the current public and arenas map, their remaining minutes, and their next map.
 - Any text message with the key phrase _"sad"_ (case not sensitive) will trigger a whole TTS (text to speech) message from Gibby.
 
-## Screenshot
+### Screenshot
 Slash command `/map`
 <img src='./assets/DemoImage.png' alt='demo screenshot desktop view'>
 
 Gibby TTS
-[Gibby TTS Demo]('./assets/DemoGibbyTTS.mp4')
+<video src='./assets/DemoGibbyTTS.mp4' alt='Gibby TTS Demo'>
 
 ## Getting Started
 
