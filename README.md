@@ -5,13 +5,13 @@ This is a Discord Bot that provides information on the current Apex Legends Map 
 - Use slash command `/map` or type `!map` into any channel in the server.   
   > This will return the current public and arenas map, their remaining minutes, and their next map.
 - Type any text message with the key phrase _"sad"_ (case not sensitive)  
-  > This will trigger a randomized wholesome TTS (text to speech) message from 	Makoa Gibraltar.
+  > This will trigger a randomized wholesome TTS (text to speech) quote by 	Makoa Gibraltar.
 
 ### Screenshot
 Slash command `/map`  
 <img src='./assets/DemoImage.png' alt='demo screenshot desktop view'>
 
-[Gibby TTS Demo Video](https://user-images.githubusercontent.com/81057116/156941475-f5cf20b8-4ad4-4d42-8490-fcc2dc6f8b53.mp4)
+[Gibby TTS Demo Video (with audio)](https://user-images.githubusercontent.com/81057116/156941475-f5cf20b8-4ad4-4d42-8490-fcc2dc6f8b53.mp4)
 
 ## Getting Started
 
