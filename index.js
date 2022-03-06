@@ -11,6 +11,8 @@ const GIBBY_LAUGH = 'https://lh3.googleusercontent.com/pw/AM-JKLVGx1ZWfcDVTgCVCE
 const PORT = process.env.PORT || 5000;
 const APEX_API_TOKEN = process.env.APEX_LEGENDS_API_TOKEN;
 const DISCORD_TOKEN = process.env.DISCORD_TOKEN;
+const GUILD_ID = process.env.GUILD_ID;
+const GUILD_ID_PL = process.env.GUILD_ID_PL;
 
 // Regex for triggering wholesome Gibby message reply
 const pattern = /sad/i;
@@ -29,7 +31,7 @@ const url = 'https://api.mozambiquehe.re/maprotation?version=2&auth=' + APEX_API
 
 function getCurrentMap() {
 
-	request.get(url, function(error, response, body) {
+	request.get(url, function (error, response, body) {
 		if (!error && response.statusCode === 200) {
 			mapData = JSON.parse(body);
 
@@ -123,14 +125,16 @@ client.login(DISCORD_TOKEN);
 // client is an instance of Discord.Client
 client.on('messageCreate', async (message) => {
 
+	const CURRENT_GUILD_ID = message.guild.id;
+
 	// Check if content of message is "!ping"
-	if (message.content == '!ping') {
-		// Call .send() on the channel object the message was sent in
-		message.channel.send('pong!');
-	}
+	// if (message.content == '!ping') {
+	// 	// Call .send() on the channel object the message was sent in
+	// 	message.channel.send('pong!');
+	// }
 
 	if (message.content == '!map') {
-		request.get(url, function(error, response, body) {
+		request.get(url, function (error, response, body) {
 			if (!error && response.statusCode === 200) {
 				mapData = JSON.parse(body);
 
@@ -206,16 +210,21 @@ client.on('messageCreate', async (message) => {
 
 	}
 
+
 	// Return wholesome Gibby message (using regex, check all cases for text "sad")
-	if (pattern.test(message.content)) {
-		const gibbyJSON = require('./assets/gibby_quotes.json');
-		const RNG = (Math.floor(Math.random() * 10)).toString();
-		const wholesomeMessage = italic('"' + gibbyJSON.quotes[RNG].quote + '" - Makoa Gibraltar, 2733');
-		const messageTTS = {
-			'tts': true,
-			'content': wholesomeMessage,
-		};
-		message.reply(messageTTS);
+
+	if (parseInt(CURRENT_GUILD_ID) == parseInt(GUILD_ID) || parseInt(CURRENT_GUILD_ID) == parseInt(GUILD_ID_PL)) {
+		if (pattern.test(message.content)) {
+
+			const gibbyJSON = require('./assets/gibby_quotes.json');
+			const RNG = (Math.floor(Math.random() * 10)).toString();
+			const wholesomeMessage = italic('"' + gibbyJSON.quotes[RNG].quote + '" - Makoa Gibraltar, 2733');
+			const messageTTS = {
+				'tts': true,
+				'content': wholesomeMessage,
+			};
+			message.reply(messageTTS);
+		}
 	}
 });
 
