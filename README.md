@@ -7,11 +7,10 @@ This is a Discord Bot that provides information on the current Apex Legends Map 
 - Any text message with the key phrase _"sad"_ (case not sensitive) will trigger a whole TTS (text to speech) message from Gibby.
 
 ### Screenshot
-Slash command `/map`
+Slash command `/map`  
 <img src='./assets/DemoImage.png' alt='demo screenshot desktop view'>
 
-Gibby TTS
-<video src='./assets/DemoGibbyTTS.mp4' alt='Gibby TTS Demo'>
+[Gibby TTS Demo Video](https://user-images.githubusercontent.com/81057116/156941475-f5cf20b8-4ad4-4d42-8490-fcc2dc6f8b53.mp4)
 
 ## Getting Started
 
