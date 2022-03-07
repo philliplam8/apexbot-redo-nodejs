@@ -20,14 +20,14 @@ Slash command `/map`
 
 ### Installation
 This project will use the following APIs and free services to run and host the applicationgit
-- [Heroku](https://www.heroku.com/)
 - [Unofficial Apex Legends API](https://apexlegendsapi.com/index.php)
+- [Heroku](https://www.heroku.com/)
 - [FreshPing](https://app.freshping.io/)
 
 #### 1. Clone and install dependencies
 1. Clone this project
     ```console
-    git clone 
+    git clone https://github.com/philliplam8/apexbot-redo-nodejs.git
     ```
 2. Use the package manager [npm](https://www.npmjs.com/) to install the following dependencies
     ```console
@@ -52,9 +52,6 @@ This project will use the following APIs and free services to run and host the a
 
     # APEX API ----------------------------------------------------------------------
     APEX_LEGENDS_API_TOKEN = ''
-
-    # MISC --------------------------------------------------------------------------
-    PORT = 5000
     ```
 3. In the following next steps, we will be adding several environment variables into this file
 
