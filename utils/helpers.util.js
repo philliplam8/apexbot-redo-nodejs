@@ -11,7 +11,7 @@ const { italic } = require('@discordjs/builders');
  * @returns Embedded message format type for Discord chat
  */
 
-function createEmbeddedMessage(gameMode, thumbnailUrl, currentMap, CurrentMapRemainingTimer, currentMapImageUrl, nextMap) {
+function createEmbeddedMessage(gameMode, thumbnailUrl, currentMap, currentMapRemainingTimer, currentMapImageUrl, nextMap) {
 
 	const battleRoyale = {
 		color: 0x0099ff,
@@ -40,7 +40,7 @@ function createEmbeddedMessage(gameMode, thumbnailUrl, currentMap, CurrentMapRem
 			},
 			{
 				name: 'Remaining Time',
-				value: CurrentMapRemainingTimer,
+				value: currentMapRemainingTimer,
 				inline: true,
 			},
 		],
