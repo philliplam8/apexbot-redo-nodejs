@@ -12,7 +12,7 @@
                 "<node_internals>/**"
             ],
             "program": "${workspaceFolder}/node_modules/protractor/bin/protractor",
-            "args":["${workspaceFolder}/conf.js"],
+            "args":["${workspaceFolder}/config.js"],
         }
     ]
 }

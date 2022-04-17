@@ -2,16 +2,19 @@
   "name": "protractor",
   "version": "1.0.0",
   "description": "",
-  "main": "conf.js",
+  "main": "config.js",
   "scripts": {
     "prewebdriver-start": "webdriver-manager update",
     "webdriver-start": "webdriver-manager start",
-    "protractor": "protractor conf.js"
+    "protractor": "protractor config.js"
   },
   "author": "Phillip Lam",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^16.0.0",
     "protractor": "^7.0.0"
+  },
+  "devDependencies": {
+    "jasmine-spec-reporter": "^7.0.0"
   }
 }
