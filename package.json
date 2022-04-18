@@ -5,9 +5,10 @@
     "node": "16.13.2"
   },
   "scripts": {
-    "deploy-commands": "cd services && node deploy-commands",
+    "deploy-commands": "cd services && node deploy-commands.service.js",
     "prestart": "npm run deploy-commands",
     "start": "node index.js",
+    "protractor-test": "cd protractor && npm run protractor",
     "test": "jest"
   },
   "dependencies": {
