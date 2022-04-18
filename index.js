@@ -5,6 +5,7 @@ const request = require('request');
 const { Client, Intents } = require('discord.js');
 const GIBBY_LAUGH = 'https://lh3.googleusercontent.com/pw/AM-JKLVGx1ZWfcDVTgCVCEAZ2ks1e-grT6oO2rEZ4LWWK5B6ZTLwV0wl3iCg9Nx068KfLrncH3aL2q5rxkshX913QMc0zeRd16g-VJpljzI8amJbpPwnICrSCSchC9QKMQott6UaHXJGVnaUbttOWC6pRMnq2Q=w1022-h466-no?authuser=0';
 const helpers = require('./utils/helpers.util.js');
+require('dotenv').config();
 const config = require('./configs/general.config.js');
 
 const app = express();
