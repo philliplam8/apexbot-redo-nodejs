@@ -5,8 +5,9 @@
     "node": "16.13.2"
   },
   "scripts": {
-    "start": "node index.js",
     "deploy-commands": "cd services && node deploy-commands",
+    "prestart": "npm run deploy-commands",
+    "start": "node index.js",
     "test": "jest"
   },
   "dependencies": {
