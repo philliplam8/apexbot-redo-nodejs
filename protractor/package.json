@@ -4,6 +4,7 @@
   "description": "",
   "main": "config.js",
   "scripts": {
+    "setup": "npm i && npm run webdriver-start",
     "prewebdriver-start": "webdriver-manager update",
     "webdriver-start": "webdriver-manager start",
     "protractor": "protractor config.js"
