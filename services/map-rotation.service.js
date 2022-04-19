@@ -18,8 +18,6 @@ async function sendChannelMessage(hook, message, isSlashCommand) {
 
 async function getCurrentMap(hook, isSlashCommand) {
 
-	// console.log(config, url);
-
 	request.get(url, async function(error, response, body) {
 		if (!error && response.statusCode === 200) {
 			const mapData = JSON.parse(body);
