@@ -2,12 +2,12 @@ const gibbyJSON = require('../assets/gibby_quotes.json');
 const { italic } = require('@discordjs/builders');
 
 /**
- * @param {*} gameMode The Apex Legends game mode (Battle Royale or Arenas)
- * @param {*} thumbnailUrl Thumbnail image URL
- * @param {*} currentMap Name of the currently active map
- * @param {*} CurrentMapRemainingTimer Remaining time on the currently active map
- * @param {*} currentMapImageUrl Map image URL
- * @param {*} nextMap Name of the next upcoming map
+ * @param {string} gameMode The Apex Legends game mode (Battle Royale or Arenas)
+ * @param {string} thumbnailUrl Thumbnail image URL
+ * @param {string} currentMap Name of the currently active map
+ * @param {string} CurrentMapRemainingTimer Remaining time on the currently active map
+ * @param {string} currentMapImageUrl Map image URL
+ * @param {string} nextMap Name of the next upcoming map
  * @returns Embedded message format type for Discord chat
  */
 
