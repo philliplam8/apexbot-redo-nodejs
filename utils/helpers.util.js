@@ -1,6 +1,81 @@
 const gibbyJSON = require('../assets/gibby_quotes.json');
 const { italic } = require('@discordjs/builders');
 
+function hideZeroInTime(time) {
+
+	let timeWithoutZero = time;
+
+	if (time <= '09') {
+		timeWithoutZero = time.substring(1, 2);
+	}
+
+	return timeWithoutZero;
+}
+
+/**
+ * Converts the time from format HH:MM:SS to a written format
+ * @param {string} time - time in format HH:MM:SS
+ * @returns {string} - time in word format i.e. 2 hours, 8 minutes, 1 second
+ */
+function convertTimer(time) {
+
+	// Only show both digits if value is > 9
+	const hoursValue = hideZeroInTime(time.substring(0, 2));
+	const minutesValue = hideZeroInTime(time.substring(3, 5));
+	const secondsValue = hideZeroInTime(time.substring(6, 8));
+
+	const hourText = 'hour';
+	const minuteText = 'minute';
+	const secondText = 'second';
+	const plural = 's';
+
+	let message = '';
+	let messageHour = '';
+	let messageMinute = '';
+	let messageSecond = '';
+
+	// Fill in Hours
+	if (hoursValue !== '0') {
+		messageHour = `${hoursValue} ${hourText}`;
+
+		if (hoursValue !== '1') {
+			messageHour = `${messageHour}${plural}`;
+		}
+	}
+
+	// Fill in Minutes
+	if (minutesValue !== '0') {
+		messageMinute = `${minutesValue} ${minuteText}`;
+		if (minutesValue !== '1') {
+			messageMinute = `${messageMinute}${plural}`;
+		}
+	}
+
+	// Fill in Seconds
+	if (secondsValue !== '0') {
+		messageSecond = `${secondsValue} ${secondText}`;
+		if (secondsValue !== '1') {
+			messageSecond = `${messageSecond}${plural}`;
+		}
+	}
+
+	// If hour and message exist, add a space and comma in between
+	// If (hour or message) exists and second exists, add a space and comma in between
+	let messageHourSuffix = '';
+	let messageSecondPrefix = '';
+
+	if (hoursValue !== '0' && minutesValue != '0') {
+		messageHourSuffix = ', ';
+	}
+
+	if ((hoursValue !== '0' || minutesValue !== '0') && secondsValue !== '0') {
+		messageSecondPrefix = ', ';
+	}
+
+	message = `${messageHour}${messageHourSuffix}${messageMinute}${messageSecondPrefix}${messageSecond}`;
+	return message;
+}
+
 /**
  * @param {string} gameMode The Apex Legends game mode (Battle Royale or Arenas)
  * @param {string} thumbnailUrl Thumbnail image URL
@@ -40,7 +115,7 @@ function createEmbeddedMessage(gameMode, thumbnailUrl, currentMap, currentMapRem
 			},
 			{
 				name: 'Remaining Time',
-				value: currentMapRemainingTimer,
+				value: convertTimer(currentMapRemainingTimer),
 				inline: true,
 			},
 		],
