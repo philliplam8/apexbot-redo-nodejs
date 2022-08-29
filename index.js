@@ -12,12 +12,12 @@ app.use(express.static(__dirname + '/public'))
 	.use(cookieParser());
 
 app.get('', async (req, res) => {
-	res.send('I\'m up!');
+	res.send('Visit route /start to start bot!');
 });
 
-app.get('/apex', async (req, res) => {
+app.get('/start', async (req, res) => {
 	bot.startDiscordBot();
-	res.end();
+	res.send('I\'m up!');
 
 });
 
